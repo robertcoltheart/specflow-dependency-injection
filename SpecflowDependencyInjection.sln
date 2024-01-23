@@ -6,6 +6,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecflowDependencyInjection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecflowDependencyInjection.Tests", "src\SpecflowDependencyInjection.Tests\SpecflowDependencyInjection.Tests.csproj", "{E89DA456-6703-4A7B-82D7-480560E52F52}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{AC188B5A-04E4-401F-9635-C3A658C297A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecflowDependencyInjection.Samples.WebApi", "src\SpecflowDependencyInjection.Samples.WebApi\SpecflowDependencyInjection.Samples.WebApi.csproj", "{546D3991-F829-4AEC-A099-B3E841ABE4C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +24,16 @@ Global
 		{E89DA456-6703-4A7B-82D7-480560E52F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E89DA456-6703-4A7B-82D7-480560E52F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E89DA456-6703-4A7B-82D7-480560E52F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546D3991-F829-4AEC-A099-B3E841ABE4C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{546D3991-F829-4AEC-A099-B3E841ABE4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{546D3991-F829-4AEC-A099-B3E841ABE4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546D3991-F829-4AEC-A099-B3E841ABE4C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{546D3991-F829-4AEC-A099-B3E841ABE4C8} = {AC188B5A-04E4-401F-9635-C3A658C297A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {67AE2B3F-0976-4D6B-9411-BC9B4C66EFAE}
