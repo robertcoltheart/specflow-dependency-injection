@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace SpecflowDependencyInjection.Samples.WebApi.Features
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -31,7 +31,7 @@ namespace SpecflowDependencyInjection.Samples.WebApi.Features
 #line 1 "Feature.feature"
 #line hidden
         
-        public SampleFeature(SampleFeature.FixtureData fixtureData, SpecflowDependencyInjection_Samples_WebApi_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SampleFeature(SampleFeature.FixtureData fixtureData, SpecFlowDependencyInjection_Samples_WebApi_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();

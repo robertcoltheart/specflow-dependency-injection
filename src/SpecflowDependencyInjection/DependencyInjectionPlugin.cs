@@ -59,14 +59,14 @@ public class DependencyInjectionPlugin : IRuntimePlugin
     {
         var root = args.ObjectContainer.Resolve<RootServiceProviderContainer>();
 
-        RegisterFactory<FeatureContext>(args.ObjectContainer, root.ScenarioProvider);
+        //RegisterFactory<FeatureContext>(args.ObjectContainer, root.ScenarioProvider);
     }
 
     private void CustomizeScenarioDependenciesEventHandler(object? sender, CustomizeScenarioDependenciesEventArgs args)
     {
         var root = args.ObjectContainer.Resolve<RootServiceProviderContainer>();
 
-        RegisterFactory<ScenarioContext>(args.ObjectContainer, root.ScenarioProvider);
+        //RegisterFactory<ScenarioContext>(args.ObjectContainer, root.ScenarioProvider);
     }
 
     private void AfterEventHandler<T>(IObjectContainer container)

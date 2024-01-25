@@ -1,7 +1,7 @@
 ﻿using SpecFlow.DependencyInjection;
 using TechTalk.SpecFlow;
 
-namespace SpecflowDependencyInjection.Samples.WebApi;
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
 
 [Binding]
 public class Hooks

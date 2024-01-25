@@ -1,7 +1,8 @@
-﻿using SpecflowDependencyInjection.Samples.WebApi.Services;
+﻿using SpecflowDependencyInjection.Samples.WebApi;
+using SpecflowDependencyInjection.Samples.WebApi.Services;
 using TechTalk.SpecFlow;
 
-namespace SpecflowDependencyInjection.Samples.WebApi;
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
 
 [Binding]
 public class Steps

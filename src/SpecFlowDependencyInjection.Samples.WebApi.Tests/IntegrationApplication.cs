@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using SpecFlow.DependencyInjection;
+using SpecflowDependencyInjection.Samples.WebApi;
 using SpecflowDependencyInjection.Samples.WebApi.Services;
 
-namespace SpecflowDependencyInjection.Samples.WebApi;
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
 
 internal class IntegrationApplication : WebApplicationFactory<Program>
 {
