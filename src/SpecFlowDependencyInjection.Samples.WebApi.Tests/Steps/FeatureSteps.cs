@@ -1,5 +1,4 @@
-﻿using SpecFlowDependencyInjection.Samples.WebApi;
-using SpecFlowDependencyInjection.Samples.WebApi.Services;
+﻿using SpecFlowDependencyInjection.Samples.WebApi.Services;
 using SpecFlowDependencyInjection.Samples.WebApi.Tests.Proxies;
 using TechTalk.SpecFlow;
 using Xunit;
@@ -37,6 +36,6 @@ public class FeatureSteps
     [Then("it should be ok")]
     public void ThenItShouldBeOk()
     {
-        Assert.IsType<ProxyService>(service.GetType());
+        Assert.Equal(nameof(ProxyService), service.GetType().Name);
     }
 }
