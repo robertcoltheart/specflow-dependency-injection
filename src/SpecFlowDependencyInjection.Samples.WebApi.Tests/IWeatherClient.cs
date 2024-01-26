@@ -1,6 +1,6 @@
 ﻿using Refit;
 
-namespace SpecFlowDependencyInjection.Samples.WebApi;
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
 
 public interface IWeatherClient
 {

@@ -9,7 +9,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RootNamespace>SpecFlow.DependencyInjection</RootNamespace>
     <AssemblyName>SpecFlow.DependencyInjection.SpecFlowPlugin</AssemblyName>
+  </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>SpecFlowDependencyInjection</PackageId>
     <Authors>robertcoltheart</Authors>
     <Description>A SpecFlow plugin for using Microsoft.Extensions.DependencyInjection</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
