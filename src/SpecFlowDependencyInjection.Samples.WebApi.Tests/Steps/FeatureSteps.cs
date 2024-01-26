@@ -1,11 +1,13 @@
-﻿using SpecflowDependencyInjection.Samples.WebApi;
-using SpecflowDependencyInjection.Samples.WebApi.Services;
+﻿using SpecFlowDependencyInjection.Samples.WebApi;
+using SpecFlowDependencyInjection.Samples.WebApi.Services;
+using SpecFlowDependencyInjection.Samples.WebApi.Tests.Proxies;
 using TechTalk.SpecFlow;
+using Xunit;
 
-namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests.Steps;
 
 [Binding]
-public class Steps
+public class FeatureSteps
 {
     private readonly FeatureContext feature;
 
@@ -15,7 +17,7 @@ public class Steps
 
     private readonly IWeatherClient client;
 
-    public Steps(FeatureContext feature, ScenarioContext scenario, IService service, IWeatherClient client)
+    public FeatureSteps(FeatureContext feature, ScenarioContext scenario, IService service, IWeatherClient client)
     {
         this.feature = feature;
         this.scenario = scenario;
@@ -26,11 +28,15 @@ public class Steps
     [When("it starts")]
     public async Task WhenItStarts()
     {
+        feature["key"] = "value1";
+        scenario["key"] = "value2";
+
         await client.GetWeatherForecast();
     }
 
     [Then("it should be ok")]
     public void ThenItShouldBeOk()
     {
+        Assert.IsType<ProxyService>(service.GetType());
     }
 }

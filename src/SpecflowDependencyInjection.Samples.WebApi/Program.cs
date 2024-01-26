@@ -1,4 +1,4 @@
-using SpecflowDependencyInjection.Samples.WebApi.Services;
+using SpecFlowDependencyInjection.Samples.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

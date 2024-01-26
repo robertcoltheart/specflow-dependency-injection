@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using SpecFlow.DependencyInjection;
-using SpecflowDependencyInjection.Samples.WebApi;
-using SpecflowDependencyInjection.Samples.WebApi.Services;
+using SpecFlowDependencyInjection.Samples.WebApi;
+using SpecFlowDependencyInjection.Samples.WebApi.Services;
+using SpecFlowDependencyInjection.Samples.WebApi.Tests.Proxies;
+using SpecFlowDependencyInjection.Samples.WebApi.Tests.Support;
 
 namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
 
@@ -13,17 +15,16 @@ internal class IntegrationApplication : WebApplicationFactory<Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseTestServer();
-
-        builder.UseEnvironment("Integration");
-        
-        builder.ConfigureServices(services =>
-        {
-            services.AddSpecFlowBindings<IntegrationApplication>();
-
-            services.AddSingleton<IService, ProxyService>();
-
-            services.AddRefitClient<IWeatherClient>();
-        });
+        builder
+            .UseEnvironment("Integration")
+            .UseTestServer()
+            .ConfigureTestServices(services =>
+            {
+                services
+                    .AddSpecFlowBindings<Hooks>()
+                    .AddSingleton<IService, ProxyService>()
+                    .AddSingleton<IHttpClientFactory>(new WebApplicationHttpClientFactory(this))
+                    .AddRefitClient<IWeatherClient>();
+            });
     }
 }

@@ -9,5 +9,5 @@ internal static class Mappings
 {
     public static readonly ConcurrentDictionary<IServiceProvider, IContextManager> BindMappings = new();
 
-    public static readonly ConcurrentDictionary<ISpecFlowContext, IServiceScope> ActiveScopes = new();
+    public static readonly ConcurrentDictionary<ISpecFlowContext, IServiceScope> ActiveServiceScopes = new();
 }

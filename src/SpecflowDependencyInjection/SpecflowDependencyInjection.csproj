@@ -6,11 +6,12 @@
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RootNamespace>SpecFlow.DependencyInjection</RootNamespace>
     <AssemblyName>SpecFlow.DependencyInjection.SpecFlowPlugin</AssemblyName>
 
     <Authors>robertcoltheart</Authors>
-    <Description>A thing that does something</Description>
+    <Description>A SpecFlow plugin for using Microsoft.Extensions.DependencyInjection</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/robertcoltheart/specflow-dependency-injection</PackageProjectUrl>
     <RepositoryUrl>https://github.com/robertcoltheart/specflow-dependency-injection</RepositoryUrl>

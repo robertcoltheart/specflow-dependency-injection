@@ -10,7 +10,7 @@ using TechTalk.SpecFlow.UnitTestProvider;
 
 namespace SpecFlow.DependencyInjection;
 
-public class DependencyInjectionPlugin : IRuntimePlugin
+internal class DependencyInjectionPlugin : IRuntimePlugin
 {
     private static readonly object Sync = new();
 
@@ -20,7 +20,6 @@ public class DependencyInjectionPlugin : IRuntimePlugin
         UnitTestProviderConfiguration unitTestProviderConfiguration)
     {
         runtimePluginEvents.CustomizeGlobalDependencies += CustomizeGlobalDependencies;
-        runtimePluginEvents.CustomizeFeatureDependencies += CustomizeFeatureDependenciesEventHandler;
         runtimePluginEvents.CustomizeScenarioDependencies += CustomizeScenarioDependenciesEventHandler;
     }
 
@@ -39,9 +38,15 @@ public class DependencyInjectionPlugin : IRuntimePlugin
                 args.ObjectContainer.RegisterFactoryAs(() =>
                 {
                     var serviceCollectionFinder = args.ObjectContainer.Resolve<IServiceProviderFinder>();
-                    var services = serviceCollectionFinder.GetServiceProvider();
 
-                    return new RootServiceProviderContainer(services, services);
+                    var scenarioProvider = serviceCollectionFinder.GetScenarioProvider();
+
+                    if (scenarioProvider == null)
+                    {
+                        throw new InvalidOperationException("Unable to find scenario dependencies. Mark a static method that returns IServiceProvider with [ScenarioDependencies].");
+                    }
+
+                    return new RootServiceProviderContainer(scenarioProvider);
                 });
 
                 args.ObjectContainer.RegisterFactoryAs(() => args.ObjectContainer.Resolve<RootServiceProviderContainer>().ScenarioProvider);
@@ -55,24 +60,17 @@ public class DependencyInjectionPlugin : IRuntimePlugin
         }
     }
 
-    private void CustomizeFeatureDependenciesEventHandler(object? sender, CustomizeFeatureDependenciesEventArgs args)
-    {
-        var root = args.ObjectContainer.Resolve<RootServiceProviderContainer>();
-
-        //RegisterFactory<FeatureContext>(args.ObjectContainer, root.ScenarioProvider);
-    }
-
     private void CustomizeScenarioDependenciesEventHandler(object? sender, CustomizeScenarioDependenciesEventArgs args)
     {
         var root = args.ObjectContainer.Resolve<RootServiceProviderContainer>();
 
-        //RegisterFactory<ScenarioContext>(args.ObjectContainer, root.ScenarioProvider);
+        RegisterFactory<ScenarioContext>(args.ObjectContainer, root.ScenarioProvider);
     }
 
     private void AfterEventHandler<T>(IObjectContainer container)
         where T : ISpecFlowContext
     {
-        if (Mappings.ActiveScopes.TryRemove(container.Resolve<T>(), out var serviceScope))
+        if (Mappings.ActiveServiceScopes.TryRemove(container.Resolve<T>(), out var serviceScope))
         {
             Mappings.BindMappings.TryRemove(serviceScope.ServiceProvider, out _);
             serviceScope.Dispose();
@@ -87,7 +85,7 @@ public class DependencyInjectionPlugin : IRuntimePlugin
             var scope = services.CreateScope();
 
             Mappings.BindMappings.TryAdd(scope.ServiceProvider, container.Resolve<IContextManager>());
-            Mappings.ActiveScopes.TryAdd(container.Resolve<T>(), scope);
+            Mappings.ActiveServiceScopes.TryAdd(container.Resolve<T>(), scope);
 
             return scope.ServiceProvider;
         });
@@ -95,7 +93,7 @@ public class DependencyInjectionPlugin : IRuntimePlugin
 
     private class RootServiceProviderContainer
     {
-        public RootServiceProviderContainer(IServiceProvider scenarioProvider, IServiceProvider featureProvider)
+        public RootServiceProviderContainer(IServiceProvider scenarioProvider)
         {
             ScenarioProvider = scenarioProvider;
         }

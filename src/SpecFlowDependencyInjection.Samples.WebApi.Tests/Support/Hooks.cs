@@ -1,7 +1,7 @@
 ﻿using SpecFlow.DependencyInjection;
 using TechTalk.SpecFlow;
 
-namespace SpecFlowDependencyInjection.Samples.WebApi.Tests;
+namespace SpecFlowDependencyInjection.Samples.WebApi.Tests.Support;
 
 [Binding]
 public class Hooks
@@ -18,8 +18,6 @@ public class Hooks
     public static void BeforeRun()
     {
         application = new IntegrationApplication();
-
-        var client = application.CreateClient();
     }
 
     [AfterTestRun]

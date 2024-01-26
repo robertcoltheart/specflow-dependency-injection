@@ -2,5 +2,5 @@
 
 internal interface IServiceProviderFinder
 {
-    IServiceProvider GetServiceProvider();
+    IServiceProvider? GetScenarioProvider();
 }

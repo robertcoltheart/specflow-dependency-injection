@@ -1,21 +1,54 @@
 ﻿## About
 
-A thing that does something.
+A SpecFlow plugin that uses `Microsoft.Extensions.DependencyInjection` as a DI container.
 
 ## Usage
-Install the package from NuGet with `dotnet add package SpecflowDependencyInjection`.
+Install the package from NuGet with `dotnet add package SpecFlowDependencyInjection`.
+
+You can expose a static method decorated with `[ScenarioDependencies]` that returns an `IServiceProvider`.
+
+For testing an ASP.NET Core application, configure a hooks class as below:
 
 ```csharp
-Example code
+[Binding]
+public class Hooks
+{
+    private static WebApplicationFactory<Program>? application;
+
+    [ScenarioDependencies]
+    public static IServiceProvider GetServices()
+    {
+        return application!.Services;
+    }
+
+    [BeforeTestRun]
+    public static void BeforeRun()
+    {
+        application = new WebApplicationFactory<Program>()
+            .WithWebHostBuilder(builder =>
+            {
+                builder
+                    .UseTestServer()
+                    .ConfigureTestServices(services =>
+                    {
+                        services
+                            .AddSpecFlowBindings() // Register all SpecFlow bindings classes
+                            .AddSingleton<IService, ProxyService>() // Register any services that should be mocked
+                            .AddHttpClient<IWeatherClient, WeatherClient>(); // Register an HTTP client
+                    });
+            });
+    }
+
+    [AfterTestRun]
+    public static void AfterRun()
+    {
+        application?.Dispose();
+    }
+}
 ```
 
-## Documentation
-See the [wiki](https://github.com/robertcoltheart/specflow-dependency-injection/wiki) for examples and help using SpecflowDependencyInjection.
-
 ## Get in touch
-Discuss with us on [Discussions](https://github.com/robertcoltheart/specflow-dependency-injection/discussions), or raise an [issue](https://github.com/robertcoltheart/specflow-dependency-injection/issues).
-
-[![Discussions](https://img.shields.io/badge/DISCUSS-ON%20GITHUB-yellow?style=for-the-badge)](https://github.com/robertcoltheart/specflow-dependency-injection/discussions)
+Raise an [issue](https://github.com/robertcoltheart/specflow-dependency-injection/issues).
 
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute to this project.

@@ -1,4 +1,4 @@
-﻿namespace SpecflowDependencyInjection.Samples.WebApi.Services;
+﻿namespace SpecFlowDependencyInjection.Samples.WebApi.Services;
 
 public class ActualService : IService
 {
