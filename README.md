@@ -34,9 +34,12 @@ public class Hooks
                     .ConfigureTestServices(services =>
                     {
                         services
-                            .AddSpecFlowBindings() // Register all SpecFlow bindings classes
-                            .AddSingleton<IService, ProxyService>() // Register any services that should be mocked
-                            .AddHttpClient<IWeatherClient, WeatherClient>(); // Register an HTTP client
+                            // Register all SpecFlow bindings classes
+                            .AddSpecFlowBindings()
+                            // Register any services that should be mocked
+                            .AddSingleton<IService, ProxyService>()
+                            // Register an HTTP client
+                            .AddHttpClient<IWeatherClient, WeatherClient>();
                     });
             });
     }

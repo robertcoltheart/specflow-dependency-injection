@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using SpecFlow.DependencyInjection;
-using SpecFlowDependencyInjection.Samples.WebApi;
 using SpecFlowDependencyInjection.Samples.WebApi.Services;
 using SpecFlowDependencyInjection.Samples.WebApi.Tests.Proxies;
 using SpecFlowDependencyInjection.Samples.WebApi.Tests.Support;
